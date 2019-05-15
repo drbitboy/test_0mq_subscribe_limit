@@ -1,3 +1,14 @@
+# New
+
+cf. https://lists.zeromq.org/pipermail/zeromq-dev/2019-May/032968.html
+
+Two changes to make this work:
+
+1. Put setsockopt/SNDHWM/RCVHWM calls before connect and bind
+2. Subscriber needs to set SNDHWM to 0 (or 65536?) so more than 1000 ZMQ_SUBSCRIBES make it to the publisher
+
+
+# Old
 
 I duplicated Benjy's results (libzmq 4.3.2; master from Github)
 
