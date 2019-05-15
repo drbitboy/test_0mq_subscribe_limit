@@ -37,9 +37,9 @@ int int0 = 0;
     cerr << "E: RCVHWM failed" << strerror (errno) << endl;
   }
 
-  // Publish messages to with envelopes 0,65535, 256,255, 512,511,
-  // 768,767, 1024,1023, 1280,1279, 1536,1535, 1792,1791, 2048,2047
-  for (uint16_t u16=0; 1; u16 = (u16+256)%2560) {
+  // Publish messages to with envelopes 0,65535, 512,511, 1024,1023
+  // 1536,1535, 2048,2047
+  for (uint16_t u16=0; 1; u16 = (u16+512)%2560) {
   int rtn;
   string incoming_string;
 
