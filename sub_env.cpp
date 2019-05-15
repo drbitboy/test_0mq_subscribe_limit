@@ -42,7 +42,7 @@ int main (void)
   //   values 24 through 1023 will be received
   // - Publisher is sending 0,65535, 512,511, 1023,1024, 1536,1535, 2048,2047
   // - So 1023 should be received, but not 1024 or above
-  for (uint16_t u16 = 24u; u16< 2600u; ++u16) {
+  for (uint16_t u16 = 24u; u16< 2601u; ++u16) {
     if (zmq_setsockopt (subscriber, ZMQ_SUBSCRIBE, &u16, 2)) {
       cerr << "E: subscriptions failed" << strerror (errno) << endl;
     }
