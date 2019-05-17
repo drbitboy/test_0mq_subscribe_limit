@@ -17,7 +17,7 @@ Usage:
   - ...
   - 57344,57343
 
-- N.B. --no-receive-hwm option for publisher seems to have no effect
+- N.B. **--no-receive-hwm** option for publisher seems to have no effect
 
 - sub_env subscribes to all possible two-byte 65,536 envelope
   - This will be unsuccessful if **--no-send-hwm** option is supplied
