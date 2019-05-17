@@ -13,11 +13,16 @@
 
 using namespace std;
 
-int main (void)
+int main (int argc, char**argv)
 {
 // Create context and publisher socket
 void *context = zmq_ctx_new ();
 void *publisher = zmq_socket (context, ZMQ_PUB);
+
+  cerr << argc << "=argc" << endl;
+  for (int i=0; i<argc; ++i) {
+    cerr << "[" << argv[i] << "]" << "=argv[" << i << "]" << endl;
+  }
 
 int int0 = 0;
 
@@ -25,9 +30,12 @@ int int0 = 0;
   if (zmq_setsockopt (publisher, ZMQ_SNDHWM, &int0, sizeof(int0))) {
     cerr << "E: SNDHWM failed" << strerror (errno) << endl;
   }
+
   // Set receiving HWM to zero
   // - So this publisher can receive flood of subscription requests?
-  if (zmq_setsockopt (publisher, ZMQ_RCVHWM, &int0, sizeof(int0))) {
+  if ((argc>1 && !strcmp(argv[1],"--no-receive-hwm"))) {
+    cerr << "Skipping RCVHWM" << endl;
+  } else if (zmq_setsockopt (publisher, ZMQ_RCVHWM, &int0, sizeof(int0))) {
     cerr << "E: RCVHWM failed" << strerror (errno) << endl;
   }
 

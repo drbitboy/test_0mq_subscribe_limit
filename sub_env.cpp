@@ -12,17 +12,24 @@
 
 using namespace std;
 
-int main (void)
+int main (int argc, char**argv)
 {
   // Prepare context and subscriber socket
   void *context = zmq_ctx_new ();
   void *subscriber = zmq_socket (context, ZMQ_SUB);
 
+  cerr << argc << "=argc" << endl;
+  for (int i=0; i<argc; ++i) {
+    cerr << "[" << argv[i] << "]" << "=argv[" << i << "]" << endl;
+  }
+
   int int0 = 0;
 
   // Set sending High-Water Mark (HWM) to zero => no HWM
   // - So publisher can receive all subscriptions
-  if (zmq_setsockopt (subscriber, ZMQ_SNDHWM, &int0, sizeof(int0))) {
+  if ((argc>1 && !strcmp(argv[1],"--no-send-hwm"))) {
+    cerr << "Skipping SNDHWM" << endl;
+  } else if (zmq_setsockopt (subscriber, ZMQ_SNDHWM, &int0, sizeof(int0))) {
     cerr << "E: SNDHWM failed" << strerror (errno) << endl;
   }
 
