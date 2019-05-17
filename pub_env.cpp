@@ -60,8 +60,8 @@ int int0 = 0;
       u16val = u16 - zo;
       // Build message with an envelope and content
       incoming_string = to_string(u16val);
-      incoming_string.insert(0, 1, (u16val>>8) && 0x0ffu);  // Envelope high byte
-      incoming_string.insert(0, 1, u16val && 0x0ffu);       // Envelope low byte
+      incoming_string.insert(0, 1, (u16val>>8) & 0x0ffu);  // Envelope high byte
+      incoming_string.insert(0, 1, u16val & 0x0ffu);       // Envelope low byte
       // Write [envelope + content] to COUT
       cout << incoming_string << "|";
       // Publish message
