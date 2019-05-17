@@ -1,24 +1,33 @@
-# Example of a PUB/SUB pair of sockets using two-byte envelopes
+# Example of a PUB/SUB pair of sockets using two-byte envelopes, and the releveance of High-Water Mark (HWM) settings to subscriptions
 
 Usage:
 
-    ./pub_env [--no-receive-hwm]
-    ./sub_env [--no-send-hwm]
+    ./pub_env [--no-receive-hwm]  ### Publisher
+    ./sub_env [--no-send-hwm]     ### Subscriber
 
+- These programs are meant to run simultaneously on the same host
+  - E.g. use separate terminals
+- Both programs will run until interrupted
 - Order of execution of those commands is not important
 
-- pub_env loops over sending pairs of messages with envelopes containing
+- pub_env loops over sending pairs of messages, at 1Hz, with two-byte envelopes containing
   - 0,65536
   - 8192,8191
   - 16384,16383
   - ...
   - 57344,57343
 
+- N.B. --no-receive-hwm option for publisher seems to have no effect
+
 - sub_env subscribes to all possible two-byte 65,536 envelope
   - This will be unsuccessful if --no-send-hwm option is supplied
     - That option skips setting ZMQ_SNDHWM to 0 (=> infinite High-Water Mark)
       - Only first 1000 (default ZMQ_SNDHWM) ZMQ_SUBSCRIBEs will become effective
-    - Only envelope 0 will be received, because only subscriptions for envelopes 0 through 999 only will be received by publisher
+    - Only envelope 0 will be received, because
+      - Only first 1000 subscriptions, for envelopes 0 through 999, will be received by publisher
+    - HOWEVER
+      - If publisher is interrupted (e.g. Control-C), and restarted
+        - Then subscriber will receive messages from all envelopes, 0 through 65535
 
 # New
 
