@@ -1,3 +1,22 @@
+# Example of a PUB/SUB pair of sockets using two-byte envelopes
+
+Usage:
+
+    ./pub_env [--no-receive-hwm]
+    ./sub_env [--no-send-hwm]
+
+    - Order of execution of those commands is not important
+
+    - pub_env loops over sending pairs of messages with envelopes containing
+      - 0,65536
+      - 8192,8191
+      - 16384,16383
+      - ...
+      - 57344,57343
+
+    - sub_env subscribes to all possible two-byte 65,536 envelope
+      - This will be unsuccessful if --no-send-hwm option is supplied
+
 # New
 
 cf. https://lists.zeromq.org/pipermail/zeromq-dev/2019-May/032968.html
@@ -5,7 +24,7 @@ cf. https://lists.zeromq.org/pipermail/zeromq-dev/2019-May/032968.html
 Two changes to make this work:
 
 1. Put setsockopt/SNDHWM/RCVHWM calls before connect and bind
-2. Subscriber needs to set SNDHWM to 0 (or 65536?) so more than 1000 ZMQ_SUBSCRIBES make it to the publisher
+2. Subscriber needs to set SNDHWM to 0 (or 65536?) so more than 1000 ZMQ_SUBSCRIBEs make it to the publisher
 
 
 # Old
