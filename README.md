@@ -16,6 +16,9 @@ Usage:
 
 - sub_env subscribes to all possible two-byte 65,536 envelope
   - This will be unsuccessful if --no-send-hwm option is supplied
+    - That option skips setting ZMQ_SNDHWM to 0 (=> infinite High-Water Mark)
+      - Only first 1000 (default ZMQ_SNDHWM) ZMQ_SUBSCRIBEs will become effective
+    - Only envelope 0 will be received, because only subscriptions for envelopes 0 through 999 only will be received by publisher
 
 # New
 
