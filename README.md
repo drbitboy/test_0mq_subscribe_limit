@@ -27,7 +27,8 @@ Usage:
       - Only first 1000 subscriptions, for envelopes 0 through 999, will be received by publisher
     - HOWEVER
       - If publisher is interrupted (e.g. Control-C), and restarted
-        - Then subscriber will receive messages from all envelopes, 0 through 65535
+      - Then subscriber will receive messages from all envelopes, 0 through 65535
+      - This is, to this developer, an unexpected behavior
 
 # New
 
