@@ -5,17 +5,17 @@ Usage:
     ./pub_env [--no-receive-hwm]
     ./sub_env [--no-send-hwm]
 
-    - Order of execution of those commands is not important
+- Order of execution of those commands is not important
 
-    - pub_env loops over sending pairs of messages with envelopes containing
-      - 0,65536
-      - 8192,8191
-      - 16384,16383
-      - ...
-      - 57344,57343
+- pub_env loops over sending pairs of messages with envelopes containing
+  - 0,65536
+  - 8192,8191
+  - 16384,16383
+  - ...
+  - 57344,57343
 
-    - sub_env subscribes to all possible two-byte 65,536 envelope
-      - This will be unsuccessful if --no-send-hwm option is supplied
+- sub_env subscribes to all possible two-byte 65,536 envelope
+  - This will be unsuccessful if --no-send-hwm option is supplied
 
 # New
 
