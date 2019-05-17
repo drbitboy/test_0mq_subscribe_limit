@@ -30,7 +30,6 @@ int int0 = 0;
   if (zmq_setsockopt (publisher, ZMQ_RCVHWM, &int0, sizeof(int0))) {
     cerr << "E: RCVHWM failed" << strerror (errno) << endl;
   }
-# endif
 
   // Use default socket name of _sckpubsub if _SOCKET macro is undefined
 # ifndef _SOCKET
